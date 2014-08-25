@@ -2,6 +2,10 @@
 # Simple setup.sh for configuring Ubuntu 12.04 LTS EC2 instance
 # for headless setup. 
 
+# change timezone to New York (eastern time)
+export TZ=America/New_York
+
+# install git and curl
 sudo apt-get install -y git
 sudo apt-get install -y curl
 
@@ -14,7 +18,9 @@ sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
 # git pull and install dotfiles as well
 cd $HOME
 if [ -d ./dotfiles/ ]; then
-    mv dotfiles dotfiles.old
+    _now=$(date +"%Y%m%d")
+    _backupdir="dotfiles.old_$_now"
+    mv dotfiles "$_backupdir"
 fi
 if [ -d .emacs.d/ ]; then
     mv .emacs.d .emacs.d~
