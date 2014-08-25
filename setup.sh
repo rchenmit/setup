@@ -18,7 +18,7 @@ sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
 # git pull and install dotfiles as well
 cd $HOME
 if [ -d ./dotfiles/ ]; then
-    _now=$(date +"%Y%m%d")
+    _now=$(date +"%Y%m%d_%H%M%S")
     _backupdir="dotfiles.old_$_now"
     mv dotfiles "$_backupdir"
 fi
