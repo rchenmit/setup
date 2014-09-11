@@ -5,8 +5,8 @@
 # change timezone to New York (eastern time)
 export TZ=America/New_York
 
-# install git and curl
-sudo apt-get install -y git
+## install git and curl
+#sudo apt-get install -y git
 sudo apt-get install -y curl
 
 # Install emacs24
@@ -32,3 +32,17 @@ ln -sb dotfiles/.bashrc .
 ln -sb dotfiles/.bashrc_custom .
 ln -sf dotfiles/.emacs.d .
 
+
+## python history and autocomplete functionality
+cd $HOME
+if [-d ./python-startup/ ]; then
+    _now=$(date +"%Y%m%d_%H%M%S")
+    _backupdir="python-startup.old_$_now"
+    mv dotfiles "$_backupdir"
+fi 
+git clone https://github.com/rchenmit/python-startup.git
+ln -sb python-startup/.pystartup .
+
+#update bash_profile so that it loads .pystartup
+echo "export PYTHONSTARTUP=~/.pystartup" >> $HOME/.bash_profile
+echo "export PYTHONPATH=~/python-startup" >> $HOME/.bash_profile
